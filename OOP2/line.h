@@ -3,21 +3,24 @@
 
 #include "point.h"
 
-class Line
+class Line: public GO
 {
     private:
         Point p1, p2;
 
     public:
-        Line() : p1(), p2() {}
-        Line(double x1, double y1, double x2, double y2) : p1(x1, y1), p2(x2, y2) {}
-        Line(Point &p1_, Point &p2_) : p1(p1_), p2(p2_) {}
+        Line() : GO(), p1(), p2() {}
+        Line(int color_, int level_, int width_, double x1, double y1, double x2, double y2) : GO(color_, level_, width_), p1(x1, y1), p2(x2, y2) {}
+        Line(int color_, int level_, int width_, Point &p1_, Point &p2_) : GO(color_, level_, width_), p1(p1_), p2(p2_) {}
 
         void print()
         {
-            std::cout << "Line: ";
-            p1.print();
-            p2.print();
+            std::cout << ">>>>Line: ";
+            GO::print();                //GRA atributy linie
+            std::cout << "p1: ";
+            p1.print();                 //GRA/GEO atributy pocat. bodu
+            std::cout << "p2: ";
+            p2.print();                 //GRA/GEO atributy konc. bodu
         }
 
         Point getStart(){return p1;}
