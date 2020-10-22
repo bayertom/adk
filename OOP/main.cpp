@@ -1,6 +1,7 @@
 //#include <QCoreApplication>
 
 #include "point.h"
+#include "line.h"
 #include "algorithms.h"
 
 int main(int argc, char *argv[])
@@ -38,6 +39,16 @@ int main(int argc, char *argv[])
 
     //Metoda tridy (staticka funkce)
     int n = Point::getCount();
+
+    //Vytvoreni linie (kompozice), pretezovani konstruktoru
+    Line l1;
+    Line l2(0, 0, 10, 10);
+    Line l3(p3, p4);
+    l1.print();
+    l2.print();
+    l3.print();
+    l1.setStart(p3);
+    l1.print();
 
     return 0;
 }
