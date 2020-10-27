@@ -6,7 +6,7 @@
 class sortByY
 {
 public:
-    sortByY();
+    sortByY(){};
 
     //Sorter by y-coordinate
     bool operator () (QPoint &p1, QPoint &p2)
