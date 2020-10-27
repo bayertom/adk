@@ -52,14 +52,15 @@ int Algorithms::getPointLinePosition(QPoint &q,QPoint &p1,QPoint &p2)
 double Algorithms::getPointLineDist(QPoint &a,QPoint &p1,QPoint &p2)
 {
     //Compute distance of point a from line p(p1, p2)
-    double numerator = a.x()*(p1.y()-p2.y())+p1.x()*(p2.y()-a.y())+p2.x()*(a.y()-p1.y());
+    double numerator = a.x()* (p1.y() - p2.y()) + p1.x()*(p2.y() - a.y()) +
+                      p2.x()*(a.y() - p1.y());
 
     //Coordinate differences
     double dx = p1.x() - p2.x();
     double dy = p1.y() - p2.y();
 
     //Point and line distance
-    return fabs((numerator/sqrt(dx*dx + dy*dy)));
+    return fabs(numerator)/sqrt(dx*dx + dy*dy);
 }
 
 
@@ -131,9 +132,73 @@ QPolygon Algorithms::qhull(std::vector<QPoint> &points)
     QPoint q1 = points[0];
     QPoint q3 = points.back();
 
-    //Add q1, q3 to upoits/lpoints
+    //Add q1, q3 to upoints/lpoints
     upoints.push_back(q1);
     upoints.push_back(q3);
+    lpoints.push_back(q1);
+    lpoints.push_back(q3);
+
+    //Split points to upoints/lpoints
+    for (int i = 0; i < points.size(); i++)
+    {
+        //Add point to upoints
+        if (getPointLinePosition(points[i], q1,q3) == 1)
+            upoints.push_back(points[i]);
+
+        //Otherwise, add point to lpoints
+        else if(getPointLinePosition(points[i], q1,q3) == 0)
+            lpoints.push_back(points[i]);
+    }
+
+    //Add q3 to CH
+    ch.push_back(q3);
+
+    //Recursion for upoints
+    qh(1, 0, upoints,ch);
+
+    //Add q1 to CH
+    ch.push_back(q1);
+
+    //Recursion for lpoints
+    qh(0, 1, lpoints,ch);
+
+    return ch;
+}
 
 
+void Algorithms::qh(int s, int e, std::vector<QPoint> &points, QPolygon &ch)
+{
+    //Create Convex Hull using QHull Algorithm (Local procedure)
+    int i_max = -1;
+    double d_max = 0;
+
+    //Browse all points
+    for (int i = 2; i < points.size(); i++)
+    {
+        //Point in the right halfplane
+        if (getPointLinePosition(points[i], points[s], points[e]) == 0)
+        {
+            double distance = getPointLineDist(points[i], points[s], points[e]);
+
+            //Actualize i_max, d_max
+            if (distance > d_max)
+            {
+                d_max=distance;
+                i_max=i;
+            }
+        }
+    }
+
+    //Suitable point has been found
+    if(i_max!=-1)
+    {
+        //Process first segment using recursion
+        qh(s, i_max, points, ch);
+
+        //Add furthest p to CH
+        ch.push_back(points[i_max]);
+
+        //Process second segment using recursion
+        qh(i_max, e, points, ch);
+    }
 }

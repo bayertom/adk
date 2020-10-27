@@ -10,10 +10,11 @@ public:
     Algorithms();
 
     double getAngle(QPoint &p1, QPoint &p2, QPoint &p3, QPoint &p4);
-    int getPointLinePosition(QPoint &q,QPoint &p1,QPoint &p2);
+    int getPointLinePosition(QPoint &q, QPoint &p1, QPoint &p2);
+    double getPointLineDist(QPoint &a, QPoint &p1, QPoint &p2);
     QPolygon jarvis(std::vector<QPoint> &points);
-    double getPointLineDist(QPoint &a,QPoint &p1,QPoint &p2);
     QPolygon qhull(std::vector<QPoint> &points);
+    void qh(int s, int e, std::vector<QPoint> &points, QPolygon &ch);
 };
 
 #endif // ALGORITHMS_H

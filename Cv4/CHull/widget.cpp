@@ -23,7 +23,14 @@ void Widget::on_pushButton_clicked()
     //Create Convex hull
     QPolygon ch;
     Algorithms alg;
-    ch = alg.jarvis(points);
+
+    //Jarvis Scan
+    if (ui->comboBox->currentIndex()==0)
+        ch = alg.jarvis(points);
+
+    //QHull
+    else
+        ch = alg.qhull(points);
 
     //Set Convex hull
     ui -> Canvas -> setCH(ch);
