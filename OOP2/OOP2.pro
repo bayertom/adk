@@ -11,6 +11,7 @@ SOURCES += \
         go.cpp \
         line.cpp \
         line2.cpp \
+        line3.cpp \
         main.cpp \
         point.cpp \
         point2.cpp \
@@ -25,6 +26,7 @@ HEADERS += \
     go.h \
     line.h \
     line2.h \
+    line3.h \
     point.h \
     point2.h \
     pointg.h

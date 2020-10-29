@@ -15,9 +15,11 @@ class Point: public GO
         Point() : GO(), x(0), y(0), point_id(count++) {};
         Point(double x_, double y_): GO(), point_id(count++), x(x_), y(y_) {}
         Point(int color, int style, int width, double x_, double y_) : GO(color, style, width), point_id(count++), x(x_), y(y_) {}
-        void print()
+        virtual ~Point(){}
+        virtual void print()
         {
-            GO::print();  //Metoda rodicovske tridy
+            std::cout << ">>>>Point: ";
+            std::cout << "Color>: " << color << ", style: " << style << ", width:" << width << '\n';
             std::cout <<"count=" << count << ", id=" << point_id << ", x=" << x << ", y=" << y << '\n';
         }
 

@@ -14,8 +14,10 @@ class Point2
     public:
         Point2(): x(0), y(0), point_id(count++) {};
         Point2(double x_, double y_) : point_id(count++), x(x_), y(y_) {}
+        ~Point2(){}
         void print()
         {
+            std::cout << ">>>>Point: ";
             std::cout << "ID=" << point_id << ", x=" << x << ", y=" << y << '\n';
         }
 
