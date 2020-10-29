@@ -12,8 +12,8 @@ class Line: public GO
         Line() : GO(), p1(), p2() {}
         Line(int color_, int level_, int width_, double x1, double y1, double x2, double y2) : GO(color_, level_, width_), p1(x1, y1), p2(x2, y2) {}
         Line(int color_, int level_, int width_, Point &p1_, Point &p2_) : GO(color_, level_, width_), p1(p1_), p2(p2_) {}
-
-        void print()
+        virtual ~Line(){}
+        virtual void print()
         {
             std::cout << ">>>>Line: ";
             GO::print();                //GRA atributy linie

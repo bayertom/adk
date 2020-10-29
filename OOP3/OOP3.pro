@@ -9,12 +9,15 @@ CONFIG -= app_bundle
 
 SOURCES += \
         go.cpp \
+        go2.cpp \
         line.cpp \
         line2.cpp \
+        line3.cpp \
         main.cpp \
         point.cpp \
         point2.cpp \
-        pointg.cpp
+        pointg.cpp \
+        pointg2.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -23,8 +26,11 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     go.h \
+    go2.h \
     line.h \
     line2.h \
+    line3.h \
     point.h \
     point2.h \
-    pointg.h
+    pointg.h \
+    pointg2.h

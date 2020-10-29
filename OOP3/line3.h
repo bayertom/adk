@@ -1,22 +1,20 @@
 #ifndef LINE3_H
 #define LINE3_H
 
-#include "go.h"
+#include "go2.h"
 #include "point2.h"
 
 //Modifikovana trida pouzivajici bod bez grafickych atributu (Point2)
-//Dynamicka alokace koncovych bodu
-class Line3: public GO
+//Dynamicka alokace koncovych bodu v konstruktoru a dealokace v destruktoru
+class Line3: public GO2
 {
     private:
         Point2 *p1, *p2;
 
     public:
-        Line3() : GO(), p1(new Point2()), p2(new Point2()) {}
-        Line3(int color_, int level_, int width_, double x1, double y1, double x2, double y2) : GO(color_, level_, width_),
+        Line3() : GO2(), p1(new Point2()), p2(new Point2()) {}
+        Line3(int color_, int level_, int width_, double x1, double y1, double x2, double y2) : GO2(color_, level_, width_),
               p1(new Point2(x1, y1)), p2(new Point2(x2, y2)) {}
-        //Line3(int color_, int level_, int width_, Point2 *p1_, Point2 *p2_) : GO(color_, level_, width_),
-        //      p1(new Point2(p1_)), p2(new Point2(p2_)) {}
         virtual ~Line3()
         {
             delete p1;
@@ -26,7 +24,7 @@ class Line3: public GO
         virtual void print()
         {
             std::cout << ">>>>Line: ";
-            std::cout << "Color>: " << color << ", style: " << style << ", width:" << width << '\n';       //GRA atributy linie
+            std::cout << "Color: " << color << ", style: " << style << ", width:" << width << '\n';       //GRA atributy linie
             std::cout << "p1: ";
             p1->print();                 //GRA/GEO atributy pocat. bodu
             std::cout << "p2: ";
@@ -43,7 +41,7 @@ class Line3: public GO
             p1->setY(y1);
         }
 
-        virtual void test(){std::cout << "Line\n";}
+        /*virtual*/ void test(){std::cout << "Line\n";} //Rana vazba
 };
 
 #endif // LINE3_H
