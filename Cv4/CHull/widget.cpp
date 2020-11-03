@@ -29,8 +29,12 @@ void Widget::on_pushButton_clicked()
         ch = alg.jarvis(points);
 
     //QHull
-    else
+    else if (ui->comboBox->currentIndex()==1)
         ch = alg.qhull(points);
+
+    //Sweep line
+    else
+        ch = alg.sweepLine(points);
 
     //Set Convex hull
     ui -> Canvas -> setCH(ch);

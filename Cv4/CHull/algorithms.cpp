@@ -202,3 +202,86 @@ void Algorithms::qh(int s, int e, std::vector<QPoint> &points, QPolygon &ch)
         qh(i_max, e, points, ch);
     }
 }
+
+QPolygon Algorithms::sweepLine(std::vector<QPoint> &points)
+{
+    //Create Convex Hull using Sweep Line Algorithm
+    QPolygon ch;
+
+    //Sort points by X
+    std::sort(points.begin(),points.end(), sortByX());
+
+    //Create lists of predecessors and successors
+    int m = points.size();
+    std::vector<int> p(m), n(m);
+
+    //Create initial approximation
+    n[0] = 1;
+    n[1] = 0;
+    p[0] = 1;
+    p[1] = 0;
+
+    //Process all points aacording to x coordinate
+    for (int i = 2; i < m; i++)
+    {
+        //Point in the upper half plane
+        if(points[i].y() >= points[i-1].y())
+        {
+            //Link i with predecessor and successor
+            p[i] = i-1;
+            n[i] = n[i-1];
+        }
+
+        //Point in the lower half plane
+        else
+        {
+            //Link i with predecessor and successor
+            p[i] = p[i-1];
+            n[i] = i - 1;
+        }
+
+        //Remaining links (analogous for both cases)
+        p[n[i]] = i;
+        n[p[i]] = i;
+
+        //Correct upper tangent
+        while(getPointLinePosition(points[n[n[i]]], points[i], points[n[i]])== 0)
+        {
+            p[n[n[i]]] = i;
+            n[i] = n[n[i]];
+        }
+
+        //Correct lower tangent
+        while(getPointLinePosition(points[p[p[i]]], points[i], points[p[i]]) == 1)
+        {
+            n[p[p[i]]] = i;
+            p[i] = p[p[i]];
+        }
+    }
+
+    //Conversion of successors to vector
+    //Add point with minimum x coordinate
+    ch.push_back(points[0]);
+
+    //Get index of its successor
+    int index=n[0];
+
+    //Repeat until first point is found
+    while(index!=0)
+    {
+        //Add to ch
+        ch.push_back(points[index]);
+
+        //Get successor
+        index = n[index];
+     }
+
+    return ch;
+}
+
+
+
+
+
+
+

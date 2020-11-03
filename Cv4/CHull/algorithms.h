@@ -15,6 +15,8 @@ public:
     QPolygon jarvis(std::vector<QPoint> &points);
     QPolygon qhull(std::vector<QPoint> &points);
     void qh(int s, int e, std::vector<QPoint> &points, QPolygon &ch);
+    QPolygon sweepLine(std::vector<QPoint> &points);
+
 };
 
 #endif // ALGORITHMS_H
