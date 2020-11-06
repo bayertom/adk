@@ -1,0 +1,10 @@
+debug/go.o
+debug/go2.o
+debug/line.o
+debug/line2.o
+debug/line3.o
+debug/main.o
+debug/point.o
+debug/point2.o
+debug/pointg.o
+debug/pointg2.o

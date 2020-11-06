@@ -1,0 +1,10 @@
+release/go.o
+release/go2.o
+release/line.o
+release/line2.o
+release/line3.o
+release/main.o
+release/point.o
+release/point2.o
+release/pointg.o
+release/pointg2.o
