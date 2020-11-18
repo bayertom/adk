@@ -33,8 +33,12 @@ void Widget::on_pushButton_clicked()
         ch = alg.qhull(points);
 
     //Sweep line
-    else
+    else if (ui->comboBox->currentIndex()==2)
         ch = alg.sweepLine(points);
+
+    //Graham Scan
+    else
+        ch = alg.graham(points);
 
     //Set Convex hull
     ui -> Canvas -> setCH(ch);
@@ -48,8 +52,26 @@ void Widget::on_pushButton_2_clicked()
     //Get Convex Hull
     QPolygon &ch = ui->Canvas->getCH();
 
-    //Clear points
+    //ClearConvex Hull
     ch.clear();
+
+    //Repaint screen
+    repaint();
+}
+
+void Widget::on_pushButton_3_clicked()
+{
+    //Get Convex Hull
+    QPolygon &ch = ui->Canvas->getCH();
+
+    //Clear Convex Hull
+    ch.clear();
+
+    //Get points
+    std::vector<QPoint> &points = ui->Canvas->getPoints();
+
+    //Clear points
+    points.clear();
 
     //Repaint screen
     repaint();

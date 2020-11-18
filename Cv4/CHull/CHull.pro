@@ -12,6 +12,8 @@ SOURCES += \
     algorithms.cpp \
     draw.cpp \
     main.cpp \
+    removebyangle.cpp \
+    sortbyangle.cpp \
     sortbyx.cpp \
     sortbyy.cpp \
     widget.cpp
@@ -19,6 +21,8 @@ SOURCES += \
 HEADERS += \
     algorithms.h \
     draw.h \
+    removebyangle.h \
+    sortbyangle.h \
     sortbyx.h \
     sortbyy.h \
     widget.h

@@ -13,6 +13,7 @@ public:
     int getPointLinePosition(QPoint &q, QPoint &p1, QPoint &p2);
     double getPointLineDist(QPoint &a, QPoint &p1, QPoint &p2);
     QPolygon jarvis(std::vector<QPoint> &points);
+    QPolygon graham(std::vector<QPoint> &points);
     QPolygon qhull(std::vector<QPoint> &points);
     void qh(int s, int e, std::vector<QPoint> &points, QPolygon &ch);
     QPolygon sweepLine(std::vector<QPoint> &points);

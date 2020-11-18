@@ -57,6 +57,7 @@ public:
         comboBox->addItem(QString());
         comboBox->addItem(QString());
         comboBox->addItem(QString());
+        comboBox->addItem(QString());
         comboBox->setObjectName(QString::fromUtf8("comboBox"));
 
         verticalLayout->addWidget(comboBox);
@@ -99,6 +100,7 @@ public:
         comboBox->setItemText(0, QCoreApplication::translate("Widget", "Jarvis Scan", nullptr));
         comboBox->setItemText(1, QCoreApplication::translate("Widget", "QHull", nullptr));
         comboBox->setItemText(2, QCoreApplication::translate("Widget", "Sweep Line", nullptr));
+        comboBox->setItemText(3, QCoreApplication::translate("Widget", "Graham Scan", nullptr));
 
         pushButton->setText(QCoreApplication::translate("Widget", "Create CH", nullptr));
         pushButton_2->setText(QCoreApplication::translate("Widget", "Clear CH", nullptr));

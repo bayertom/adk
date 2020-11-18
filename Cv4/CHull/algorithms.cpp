@@ -1,7 +1,11 @@
 #include "algorithms.h"
 #include "sortbyy.h"
 #include "sortbyx.h"
+#include "sortbyangle.h"
+#include "removebyangle.h"
 #include <cmath>
+#include <deque>
+#include <stack>
 
 Algorithms::Algorithms()
 {
@@ -25,7 +29,6 @@ double Algorithms::getAngle(QPoint &p1, QPoint &p2, QPoint &p3, QPoint &p4)
 
     return fabs(acos(dot/(nu*nv)));
 }
-
 
 int Algorithms::getPointLinePosition(QPoint &q,QPoint &p1,QPoint &p2)
 {
@@ -62,7 +65,6 @@ double Algorithms::getPointLineDist(QPoint &a,QPoint &p1,QPoint &p2)
     //Point and line distance
     return fabs(numerator)/sqrt(dx*dx + dy*dy);
 }
-
 
 QPolygon Algorithms::jarvis(std::vector<QPoint> &points)
 {
@@ -116,6 +118,60 @@ QPolygon Algorithms::jarvis(std::vector<QPoint> &points)
     } while ((pj!=q));
 
 return ch;
+}
+
+
+QPolygon Algorithms::graham(std::vector<QPoint> &points)
+{
+    //Create Convex Hull using Graham Scan Algorithm
+    QPolygon ch;
+
+    //Find pivot q
+    QPoint q = *min_element(points.begin(), points.end(), sortByY());
+
+    //Sort points by their directions
+    std::sort(points.begin(), points.end(), sortByAngle(q));
+
+    //Remove duplicate points
+    std::vector <QPoint> ::iterator it = std::unique(points.begin(), points.end(), removeByAngle(q));
+
+    //Trim vector
+    points.resize(it - points.begin());
+
+    //Add 2 points to CH
+    ch.push_front(q);
+    ch.push_front(points[1]);
+
+    //Process all points
+    int j = 2, n = points.size();
+
+    while (j < n)
+    {
+        //Get point on the top of Stack
+        QPoint p1 = ch.front();
+
+        //Remove point on the top from Stack
+        ch.pop_front();
+
+        //Get point on the top of Stack
+        QPoint p2 = ch.front();
+
+        //Is point[j] in the left halfplane?
+        if (getPointLinePosition(points[j], p2, p1) == 1)
+        {
+            //Push point p1 to Stack
+            ch.push_front(p1);
+
+            //Push point[j] to Stack
+            ch.push_front(points[j]);
+
+            //Increment j
+            j++;
+        }
+    }
+
+    return ch;
+
 }
 
 
