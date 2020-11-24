@@ -10,6 +10,7 @@ CONFIG += c++11
 
 SOURCES += \
     algorithms.cpp \
+    draw.cpp \
     edge.cpp \
     main.cpp \
     qpoint3d.cpp \
@@ -18,6 +19,7 @@ SOURCES += \
 
 HEADERS += \
     algorithms.h \
+    draw.h \
     edge.h \
     qpoint3d.h \
     sortbyx.h \

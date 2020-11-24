@@ -94,4 +94,40 @@ int Algorithms::findDelaunayPoint(QPoint3D &pi, QPoint3D &pj, std::vector<QPoint
             }
         }
     }
+
+    return i_min;
+}
+
+
+double Algorithms::dist(QPoint3D &p1, QPoint3D &p2)
+{
+     //Get Euclidean distance between two points
+     double dx = (p1.x() - p2.x());
+     double dy = (p1.y() - p2.y());
+
+     return sqrt(dx*dx + dy*dy);
+}
+
+
+int Algorithms::getNearestpoint(QPoint3D &p, std::vector<QPoint3D> &points)
+{
+    //Find nearest point to p
+    int i_min = 1;
+    double d_min = dist(p, points[1]);
+
+    //Browses all points
+    for (unsigned int i = 2; i < points.size(); i++)
+    {
+        //Compute distance
+        double d = dist(p, points[i]);
+
+        //Actualize minimum i and distance
+        if (d < d_min)
+        {
+            d_min=d;
+            i_min=i;
+        }
+    }
+
+    return i_min;
 }
