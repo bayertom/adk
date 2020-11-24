@@ -1,5 +1,7 @@
 #include "algorithms.h"
 
+#include <list>
+#include "sortbyx.h"
 
 int Algorithms::getPointLinePosition(QPoint3D &q,QPoint3D &p1,QPoint3D &p2)
 {
@@ -130,4 +132,56 @@ int Algorithms::getNearestpoint(QPoint3D &p, std::vector<QPoint3D> &points)
     }
 
     return i_min;
+}
+
+std::vector<Edge> Algorithms:: DT(std::vector<QPoint3D> &points)
+{
+    //Delaunay triangulation
+    std::vector<Edge> dt;
+    std::list<Edge> ael;
+
+    //Sort by X
+    sort(points.begin(), points.end(), sortByX());
+
+    //Pivot
+    QPoint3D q = points[0];
+
+    //Nearest point
+    int index = getNearestpoint(q,points);
+    QPoint3D p_nearest = points[index];
+
+    //Find optimal Delaunay point
+    int i_o = findDelaunayPoint(q, p_nearest,points);
+
+    //Create new edge
+    Edge e(q,p_nearest);
+
+    //No suitable point found in the left halfplane
+    if (i_o == -1)
+    {
+        //Change orientation of the edge
+        e.changeOrientation();
+
+        //Find optimal Delauanay points once more
+        i_o = findDelaunayPoint(p_nearest, q, points);
+    }
+
+    //3rd vertex of triangle
+    QPoint3D p_3 = points[i_o];
+
+    //Create inicial triangle
+    Edge e2(e.getEnd(), p_3);
+    Edge e3(p_3, e.getStart());
+
+    //Add triangle to DT
+    dt.push_back(e);
+    dt.push_back(e2);
+    dt.push_back(e3);
+
+    //Add edges to ael
+    ael.push_back(e);
+    ael.push_back(e2);
+    ael.push_back(e3);
+
+
 }

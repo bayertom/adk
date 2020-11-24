@@ -16,6 +16,8 @@ private:
 
 public:
     explicit Draw(QWidget *parent = nullptr);
+    void paintEvent(QPaintEvent *event);
+    void mousePressEvent(QMouseEvent *event);
     void setPoints(std::vector<QPoint3D> &points_){points=points_;}
     std::vector<QPoint3D> & getPoints(){return points;}
 

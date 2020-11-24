@@ -14,8 +14,8 @@ class Edge
 
         void setStart(QPoint3D &s_){s = s_;}
         void setEnd(QPoint3D &e_){e = e_;}
-        QPoint3D getStart(){return s;}
-        QPoint3D getEnd(){return e;}
+        QPoint3D & getStart(){return s;}
+        QPoint3D & getEnd(){return e;}
         void changeOrientation()
         {
             QPoint3D a = s;
