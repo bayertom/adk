@@ -36,7 +36,7 @@ public:
     {
         if (Widget->objectName().isEmpty())
             Widget->setObjectName(QString::fromUtf8("Widget"));
-        Widget->resize(800, 600);
+        Widget->resize(1062, 681);
         horizontalLayout = new QHBoxLayout(Widget);
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         Canvas = new Draw(Widget);

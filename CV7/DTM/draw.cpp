@@ -16,6 +16,15 @@ void Draw::paintEvent(QPaintEvent *event)
         painter.drawEllipse(points[i].x() - 5, points[i].y() - 5, 10, 10);
     }
 
+    //Draw edges
+    QPen p(Qt::green, 1);
+    painter.setPen(p);
+
+    for (int i = 0; i < dt.size(); i++)
+    {
+        painter.drawLine(dt[i].getStart(), dt[i].getEnd());
+    }
+
     painter.end();
 }
 

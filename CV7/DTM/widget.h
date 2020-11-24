@@ -18,6 +18,10 @@ public:
 private slots:
     void on_pushButton_7_clicked();
 
+    void on_pushButton_11_clicked();
+
+    void on_pushButton_12_clicked();
+
 private:
     Ui::Widget *ui;
 };

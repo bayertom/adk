@@ -2,6 +2,7 @@
 #define ALGORITHMS_H
 
 #include <vector>
+#include <list>
 #include "qpoint3d.h"
 #include "edge.h"
 
@@ -16,6 +17,7 @@ public:
     double dist(QPoint3D &p1, QPoint3D &p2);
     int getNearestpoint(QPoint3D &p, std::vector<QPoint3D> &points);
     std::vector<Edge> DT(std::vector<QPoint3D> &points);
+    void updateAEL(Edge &e, std::list<Edge> &ael);
 };
 
 #endif // ALGORITHMS_H
