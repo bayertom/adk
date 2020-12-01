@@ -13,6 +13,7 @@ class Draw : public QWidget
 private:
     std::vector<QPoint3D> points;
     std::vector <Edge> dt;
+    std::vector <Edge> contours;
 
 
 public:
@@ -23,6 +24,8 @@ public:
     std::vector<QPoint3D> & getPoints(){return points;}
     void setDT(std::vector<Edge> &dt_){dt = dt_;}
     std::vector<Edge> & getDT(){return dt;}
+    void setContours(std::vector<Edge> &contours_){contours = contours_;}
+    std::vector<Edge> & getContours(){return contours;}
 
 signals:
 

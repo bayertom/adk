@@ -7,6 +7,9 @@ Widget::Widget(QWidget *parent)
     , ui(new Ui::Widget)
 {
     ui->setupUi(this);
+    z_min = 0;
+    z_max = 500;
+    dz = 10;
 }
 
 Widget::~Widget()
@@ -17,17 +20,28 @@ Widget::~Widget()
 
 void Widget::on_pushButton_7_clicked()
 {
-    //Create DT
-
-    //Get points
-    std::vector<QPoint3D> points = ui->Canvas->getPoints();
-
-    //Create DT
+    //Create contour lines
     Algorithms a;
-    std::vector<Edge> dt=a.DT(points);
+    std::vector<Edge> dt;
 
-    //Set DT
-    ui->Canvas->setDT(dt);
+    //DT needs to be created
+    if(dt.size() == 0)
+    {
+        //Get points
+        std::vector<QPoint3D> points = ui->Canvas->getPoints();
+
+        //Create DT
+        dt = a.DT(points);
+
+        //Set DT
+        ui->Canvas->setDT(dt);
+    }
+
+    //Create contour lines
+    std::vector<Edge> contours = a.contourLines(dt, z_min, z_max, dz);
+
+    //Set contours
+    ui->Canvas->setContours(contours);
 
     //Repaint
     repaint();
@@ -36,8 +50,6 @@ void Widget::on_pushButton_7_clicked()
 
 void Widget::on_pushButton_11_clicked()
 {
-    //Clear points
-
     //Get points
     std::vector<QPoint3D> &points = ui->Canvas->getPoints();
 
@@ -51,14 +63,35 @@ void Widget::on_pushButton_11_clicked()
 
 void Widget::on_pushButton_12_clicked()
 {
-    //Clear DT
-
-    //Get points
+    //Get DT and contours
     std::vector<Edge> &dt = ui->Canvas->getDT();
+    std::vector<Edge> &contours = ui->Canvas->getContours();
 
-    //Clear points
+    //Clear DT and contours
     dt.clear();
+    contours.clear();
 
     //Repaint
     repaint();
+}
+
+
+void Widget::on_lineEdit_editingFinished()
+{
+    //Set z_min
+    z_min = ui -> lineEdit -> text().toDouble();
+}
+
+
+void Widget::on_lineEdit_2_editingFinished()
+{
+    //Set z_max
+    z_max = ui -> lineEdit_2 -> text().toDouble();
+}
+
+
+void Widget::on_lineEdit_3_editingFinished()
+{
+    //Set dz
+    dz = ui -> lineEdit_3 -> text().toDouble();
 }
