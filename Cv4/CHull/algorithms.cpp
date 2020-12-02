@@ -1,5 +1,6 @@
 #include "algorithms.h"
 #include "sortbyy.h"
+#include "sortbyyright.h"
 #include "sortbyx.h"
 #include "sortbyangle.h"
 #include "removebyangle.h"
@@ -126,8 +127,8 @@ QPolygon Algorithms::graham(std::vector<QPoint> &points)
     //Create Convex Hull using Graham Scan Algorithm
     QPolygon ch;
 
-    //Find pivot q
-    QPoint q = *min_element(points.begin(), points.end(), sortByY());
+    //Find pivot q: the lowest rightmost point
+    QPoint q = *min_element(points.begin(), points.end(), sortByYRight());
 
     //Sort points by their directions
     std::sort(points.begin(), points.end(), sortByAngle(q));
