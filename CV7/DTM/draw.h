@@ -6,15 +6,17 @@
 
 #include "qpoint3d.h"
 #include "edge.h"
+#include "triangle.h"
 
 class Draw : public QWidget
 {
     Q_OBJECT
+
 private:
-    std::vector<QPoint3D> points;
+    std::vector <QPoint3D> points;
     std::vector <Edge> dt;
     std::vector <Edge> contours;
-
+    std::vector <Triangle> dtm;
 
 public:
     explicit Draw(QWidget *parent = nullptr);
@@ -26,6 +28,8 @@ public:
     std::vector<Edge> & getDT(){return dt;}
     void setContours(std::vector<Edge> &contours_){contours = contours_;}
     std::vector<Edge> & getContours(){return contours;}
+    void setDTM(std::vector<Triangle> &dtm_){dtm = dtm_;}
+    std::vector<Triangle> & getDTM(){return dtm;}
 
 signals:
 

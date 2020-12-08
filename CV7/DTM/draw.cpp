@@ -25,8 +25,35 @@ void Draw::paintEvent(QPaintEvent *event)
         painter.drawLine(dt[i].getStart(), dt[i].getEnd());
     }
 
+    //Draw slope
+    double k = 255/180.0;
+
+    for (Triangle t : dtm)
+    {
+        //Get triangle vertices
+        QPoint3D p1 = t.getP1();
+        QPoint3D p2 = t.getP2();
+        QPoint3D p3 = t.getP3();
+
+        //Get slope
+        int colorSlope = 255 - t.getSlope()*k;
+
+        //Create color and set brush
+        QColor c(colorSlope,colorSlope,colorSlope);
+        painter.setBrush(c);
+
+        //Create triangle, add vertices
+        QPolygonF triangle;
+        triangle.append(QPointF(p1.x(), p1.y()));
+        triangle.append(QPointF(p2.x(), p2.y()));
+        triangle.append(QPointF(p3.x(), p3.y()));
+
+        //Draw triangle
+        painter.drawPolygon(triangle);
+    }
+
     //Draw contour lines
-    QPen q(Qt::blue, 1);
+    QPen q(Qt::gray, 1);
     painter.setPen(q);
 
     for (int i = 0; i < contours.size(); i++)

@@ -38,8 +38,11 @@ public:
     QLineEdit *lineEdit_3;
     QPushButton *pushButton_7;
     QPushButton *pushButton_12;
+    QPushButton *pushButton_2;
+    QPushButton *pushButton_3;
     QSpacerItem *verticalSpacer_4;
     QPushButton *pushButton_11;
+    QPushButton *pushButton_4;
     QSpacerItem *verticalSpacer_6;
 
     void setupUi(QWidget *Widget)
@@ -110,6 +113,16 @@ public:
 
         verticalLayout_3->addWidget(pushButton_12);
 
+        pushButton_2 = new QPushButton(Widget);
+        pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
+
+        verticalLayout_3->addWidget(pushButton_2);
+
+        pushButton_3 = new QPushButton(Widget);
+        pushButton_3->setObjectName(QString::fromUtf8("pushButton_3"));
+
+        verticalLayout_3->addWidget(pushButton_3);
+
         verticalSpacer_4 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
         verticalLayout_3->addItem(verticalSpacer_4);
@@ -118,6 +131,11 @@ public:
         pushButton_11->setObjectName(QString::fromUtf8("pushButton_11"));
 
         verticalLayout_3->addWidget(pushButton_11);
+
+        pushButton_4 = new QPushButton(Widget);
+        pushButton_4->setObjectName(QString::fromUtf8("pushButton_4"));
+
+        verticalLayout_3->addWidget(pushButton_4);
 
         verticalSpacer_6 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
@@ -144,7 +162,10 @@ public:
         lineEdit_3->setText(QCoreApplication::translate("Widget", "10", nullptr));
         pushButton_7->setText(QCoreApplication::translate("Widget", "Contour lines", nullptr));
         pushButton_12->setText(QCoreApplication::translate("Widget", "Clear contours", nullptr));
+        pushButton_2->setText(QCoreApplication::translate("Widget", "Analyze DTM", nullptr));
+        pushButton_3->setText(QCoreApplication::translate("Widget", "Clear analysis", nullptr));
         pushButton_11->setText(QCoreApplication::translate("Widget", "Clear Points", nullptr));
+        pushButton_4->setText(QCoreApplication::translate("Widget", "Clear all", nullptr));
     } // retranslateUi
 
 };
