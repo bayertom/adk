@@ -96,7 +96,7 @@ QPolygon Algorithms::jarvis(std::vector<QPoint> &points)
         double o_max = 0;
 
         //Find suitable point maximizing angle omega
-        for (int i = 0; i < points.size(); i++)
+        for (int i = 1; i < points.size(); i++)
         {
             //Compute omega
             double omega = getAngle(pj, pjj, pj, points[i]);
